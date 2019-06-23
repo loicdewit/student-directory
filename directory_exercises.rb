@@ -1,14 +1,20 @@
+MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+
 def input_students
-  puts "Please enter the names of the students"
+  puts "Please enter the names of the students, press enter, and add their cohort"
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
   # get the first name
   name = gets.chomp
+  cohort = gets.chomp
+  if cohort = "" || !MONTHS.include(cohort)
+    cohort = "november"
+  end
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -24,9 +30,7 @@ end
 
 def print(students)
   students.each do |student|
-    str1 = "#{student[:name]}".center(20)
-    str2 = "(#{student[:cohort]} cohort)".center(20)
-    puts str1 + str2
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 

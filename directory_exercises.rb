@@ -1,23 +1,24 @@
 MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 
 def input_students
-  puts "Please enter the names of the students, press enter, and add their cohort"
+  puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
   # get the first name
   name = gets.chomp
-  cohort = gets.chomp
-  if cohort = "" || !MONTHS.include(cohort)
-    cohort = "november"
-  end
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students"
+    students << {name: name, cohort: :november}
+    if students.count != 1
+      str = "students"
+    else
+      str = "student"
+    end
+    puts "Now we have #{students.count} #{str}"
     # get another name from the user
-    name = gets.chomp
+    name = gets.strip
   end
   # return the array of students
   students
@@ -28,10 +29,22 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
+def print(students_by_cohort)
+  students_by_cohort.map { |key, value| puts "Cohort: #{key}, students: #{value.join(", ")}"}
+end
+
+def sort_by_cohort(students)
+  cohort_sort = {}
   students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    co = student[:cohort]
+    stu = student[:name]
+    if cohort_sort[co] == nil
+      cohort_sort[co] = [stu]
+    else
+      cohort_sort[co].push(stu)
+    end
   end
+  return cohort_sort
 end
 
 def print_footer(students)
@@ -41,5 +54,5 @@ end
 students = input_students
 #nothing happens until we call the methods
 print_header
-print(students)
+print(sort_by_cohort(students))
 print_footer(students)

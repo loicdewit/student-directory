@@ -103,11 +103,11 @@ def write(file)
 end
 
 def load_students(filename)
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    add(line.chomp.split(','))
+  File.open(filename, "r") do |f|
+    f.readlines.each do |line|
+      add(line.chomp.split(','))
+    end
   end
-  file.close
 end
 
 def try_load_students

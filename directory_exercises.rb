@@ -30,7 +30,7 @@ def print_header
 end
 
 def print(students_by_cohort)
-  students_by_cohort.map { |key, value| puts "Cohort: #{key}, students: #{value.join(", ")}"}
+    students_by_cohort.map { |key, value| puts "Cohort: #{key}, students: #{value.join(", ")}"}
 end
 
 def sort_by_cohort(students)
@@ -48,11 +48,15 @@ def sort_by_cohort(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+    puts "Overall, we have #{students.count} great students
 end
 
 students = input_students
 #nothing happens until we call the methods
-print_header
-print(sort_by_cohort(students))
-print_footer(students)
+if students == []
+  return nil
+else
+  print_header
+  print(sort_by_cohort(students))
+  print_footer(students)
+end

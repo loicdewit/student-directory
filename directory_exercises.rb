@@ -22,10 +22,10 @@ def print_header
   puts "-------------"
 end
 
-def print(students, letter="")
-  students.each_with_index do |student, index|
-    if students[0] == letter || letter == ""
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+def print(students)
+  students.each do |student|
+    if student[:name].length < 12
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
 end
